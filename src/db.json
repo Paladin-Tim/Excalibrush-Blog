@@ -1,0 +1,53 @@
+{
+  "users": [
+    {
+      "id": "001",
+      "login": "admin",
+      "password": "pass1112",
+      "role_id": "10",
+      "registred_at": "2025-01-02"
+    }
+  ],
+  "roles": [
+    {
+      "id": "10",
+      "name": "Administrator"
+    },
+    {
+      "id": "01",
+      "name": "Guest"
+    },
+    {
+      "id": "02",
+      "name": "User"
+    },
+    {
+      "id": "03",
+      "name": "Moderator"
+    }
+  ],
+  "posts": [
+    {
+      "id": "001",
+      "title": "Test post",
+      "content": "Test post content",
+      "image_url": "https://sun9-38.userapi.com/impg/te6xtPe98qBb7HSP_FfaoeqQXwr8p4AsKKoE3w/oB66VUIRBNY.jpg?size=1445x1920&quality=95&sign=0fd17e2c676b3c89985df8682746e053&type=album",
+      "published_at": "2025-01-12"
+    },
+    {
+      "id": "002",
+      "title": "Test post",
+      "content": "Test post content",
+      "image_url": "https://sun9-38.userapi.com/impg/te6xtPe98qBb7HSP_FfaoeqQXwr8p4AsKKoE3w/oB66VUIRBNY.jpg?size=1445x1920&quality=95&sign=0fd17e2c676b3c89985df8682746e053&type=album",
+      "published_at": "2025-01-15"
+    },
+    {
+      "id": "003",
+      "title": "Test post",
+      "content": "Test post content",
+      "image_url": "https://sun9-38.userapi.com/impg/te6xtPe98qBb7HSP_FfaoeqQXwr8p4AsKKoE3w/oB66VUIRBNY.jpg?size=1445x1920&quality=95&sign=0fd17e2c676b3c89985df8682746e053&type=album",
+      "published_at": "2025-01-22"
+    }
+  ],
+  "comments": []
+}
