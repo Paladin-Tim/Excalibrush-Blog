@@ -1,0 +1,32 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #281212;
+  padding: 1rem;
+
+  &__logo-wrapper {
+    & .logo {
+      background-image: url(/src/assets/site_logo.png);
+      background-size: contain;
+      background-repeat: no-repeat;
+      height: 50px;
+      aspect-ratio: 557 / 100;
+    }
+  }
+
+  &__menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & .buttons {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
