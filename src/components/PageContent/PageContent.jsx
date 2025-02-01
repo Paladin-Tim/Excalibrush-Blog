@@ -1,5 +1,5 @@
 import "./PageContent.scss";
 
-export const PageContent = () => {
-  return <main className="content"></main>;
+export const PageContent = ({ children }) => {
+  return <main className="content">{children}</main>;
 };
