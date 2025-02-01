@@ -2,13 +2,14 @@
 // import { ref, onValue, get, update, remove, push } from "firebase/database";
 import { getUser } from "./get-user.js";
 import { addUser } from "./add-user.js";
-import { createSession } from "./create-session.js";
+// import { createSession } from "./create-session.js";
+import { sessions } from "./sessions.js";
 
 //const usersDBRef = ref(db, "users");
 
 export const server = {
-  authorize(authLogin, authPassword) {
-    const user = getUser(authLogin);
+  async authorize(authLogin, authPassword) {
+    const user = await getUser(authLogin);
 
     if (!user) {
       return {
@@ -24,12 +25,17 @@ export const server = {
 
     return {
       error: null,
-      res: createSession(user.role_id),
+      res: {
+        id: user.id,
+        login: user.login,
+        roleId: user.role_id,
+        session: sessions.create(user),
+      },
     };
   },
 
-  register(regLogin, regPassword) {
-    const user = getUser(regLogin);
+  async register(regLogin, regPassword) {
+    const user = await getUser(regLogin);
 
     if (user) {
       return {
@@ -38,11 +44,19 @@ export const server = {
       };
     }
 
-    addUser(regLogin, regPassword);
+    await addUser(regLogin, regPassword);
 
     return {
       error: null,
-      res: createSession(user.role_id),
+      res: {
+        id: user.id,
+        login: user.login,
+        roleId: user.role_id,
+        session: sessions.create(user),
+      },
     };
+  },
+  logout(session) {
+    sessions.remove(session);
   },
 };

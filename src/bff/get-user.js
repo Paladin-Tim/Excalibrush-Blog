@@ -3,8 +3,10 @@ import { ref, get } from "firebase/database";
 
 const usersDBRef = ref(db, "users");
 
-export const getUser = (loginToFind) => {
-  get(usersDBRef).then((snapshot) => {
-    return snapshot.val().find(({ login }) => login === loginToFind);
+export const getUser = async (loginToFind) => {
+  let user = {};
+  await get(usersDBRef).then((snapshot) => {
+    user = snapshot.val().find(({ login }) => login === loginToFind);
   });
+  return user;
 };

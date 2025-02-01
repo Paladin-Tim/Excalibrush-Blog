@@ -6,39 +6,68 @@ import {
   LogoutOutlined,
   FileAddOutlined,
 } from "@ant-design/icons";
-
-const items = [
-  {
-    key: "sub1",
-    label: "User name",
-    icon: <UserOutlined />,
-    children: [
-      {
-        key: "0",
-        label: "Users",
-        icon: <UsergroupDeleteOutlined />,
-      },
-      {
-        key: "1",
-        label: "New post",
-        icon: <FileAddOutlined />,
-      },
-      {
-        key: "2",
-        label: "Log out",
-        icon: <LogoutOutlined />,
-      },
-    ],
-  },
-];
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectUserRole,
+  selectUserLogin,
+  selectUserSession,
+} from "../../redux/selectors";
+import { logout } from "../../redux/actions";
+import { ROLE } from "../../bff/constants";
 
 export const AuthPanel = () => {
+  const roleId = useSelector(selectUserRole);
+  const login = useSelector(selectUserLogin);
+  const session = useSelector(selectUserSession);
+
+  const dispatch = useDispatch();
+
+  const items = [
+    {
+      key: "sub1",
+      label: login,
+      icon: <UserOutlined />,
+      children: [
+        {
+          key: "0",
+          label: "Users",
+          icon: <UsergroupDeleteOutlined />,
+        },
+        {
+          key: "1",
+          label: "New post",
+          icon: <FileAddOutlined />,
+        },
+        {
+          key: "2",
+          label: "Log out",
+          icon: <LogoutOutlined />,
+        },
+      ],
+    },
+  ];
+
+  const handleMenuClick = (e) => {
+    switch (e.key) {
+      case "2":
+        dispatch(logout(session));
+    }
+  };
+
   return (
     <section className="header__auth-panel">
-      <Link to="/login">
-        <Button>Log in</Button>
-      </Link>
-      <Menu onClick="" mode="vertical" items={items} />
+      {roleId === ROLE.GUEST ? (
+        <Link to="/login">
+          <Button>Log in</Button>
+        </Link>
+      ) : (
+        <Menu
+        className="admin__menu"
+          onClick={(e) => handleMenuClick(e)}
+          mode="vertical"
+          items={items}
+        />
+      )}
     </section>
   );
 };
