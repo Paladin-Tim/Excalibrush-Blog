@@ -26,7 +26,7 @@ export const server = {
     return {
       error: null,
       res: {
-        id: user.id,
+        // id: user.id,
         login: user.login,
         roleId: user.role_id,
         session: sessions.create(user),
@@ -35,21 +35,21 @@ export const server = {
   },
 
   async register(regLogin, regPassword) {
-    const user = await getUser(regLogin);
+    const existedUser = await getUser(regLogin);
 
-    if (user) {
+    if (existedUser) {
       return {
         error: "This login is already in use!",
         res: null,
       };
     }
 
-    await addUser(regLogin, regPassword);
+    const user = await addUser(regLogin, regPassword);
 
     return {
       error: null,
       res: {
-        id: user.id,
+        // id: user.id,
         login: user.login,
         roleId: user.role_id,
         session: sessions.create(user),
