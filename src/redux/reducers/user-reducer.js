@@ -2,7 +2,6 @@ import { ROLE } from "../../bff/constants";
 import { ACTION_TYPES } from "../actions/action-types";
 
 const initialState = {
-  id: null,
   login: null,
   roleId: ROLE.GUEST,
   session: null,

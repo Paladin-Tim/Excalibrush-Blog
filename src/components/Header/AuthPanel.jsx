@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button, Menu } from "antd";
 import {
   UserOutlined,
@@ -21,34 +21,47 @@ export const AuthPanel = () => {
   const session = useSelector(selectUserSession);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const items = [
     {
       key: "sub1",
       label: login,
       icon: <UserOutlined />,
-      children: [
-        {
-          key: "0",
-          label: "Users",
-          icon: <UsergroupDeleteOutlined />,
-        },
-        {
-          key: "1",
-          label: "New post",
-          icon: <FileAddOutlined />,
-        },
-        {
-          key: "2",
-          label: "Log out",
-          icon: <LogoutOutlined />,
-        },
-      ],
+      children:
+        roleId === ROLE.ADMIN
+          ? [
+              {
+                key: "0",
+                label: "Users",
+                icon: <UsergroupDeleteOutlined />,
+              },
+              {
+                key: "1",
+                label: "New post",
+                icon: <FileAddOutlined />,
+              },
+              {
+                key: "2",
+                label: "Log out",
+                icon: <LogoutOutlined />,
+              },
+            ]
+          : [
+              {
+                key: "2",
+                label: "Log out",
+                icon: <LogoutOutlined />,
+              },
+            ],
     },
   ];
 
   const handleMenuClick = (e) => {
     switch (e.key) {
+      case "0":
+        navigate("/users");
+        break;
       case "2":
         dispatch(logout(session));
     }
@@ -62,7 +75,7 @@ export const AuthPanel = () => {
         </Link>
       ) : (
         <Menu
-        className="admin__menu"
+          className="admin__menu"
           onClick={(e) => handleMenuClick(e)}
           mode="vertical"
           items={items}

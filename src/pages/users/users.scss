@@ -1,0 +1,46 @@
+.usersTab {
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  color: #000;
+
+  &__wrapper {
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+    width: 65%;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 1.3rem;
+  }
+
+  & .userInfo {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+
+    &__wrapper {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: solid 2px #000;
+      padding: 0.8rem 0;
+    }
+
+    &__login {
+      flex-grow: 1;
+    }
+
+    &__regDate {
+      flex-grow: 1;
+    }
+
+    &__role {
+      flex-grow: 1;
+    }
+  }
+}
