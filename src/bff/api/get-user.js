@@ -1,4 +1,4 @@
-import { db } from "../firebase";
+import { db } from "../../firebase";
 import { ref, get } from "firebase/database";
 
 const usersDBRef = ref(db, "users");

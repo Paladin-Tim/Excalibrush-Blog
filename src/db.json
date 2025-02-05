@@ -1,13 +1,13 @@
 {
-  "users": [
-    {
+  "users": {
+    "001": {
       "id": "001",
       "login": "admin",
       "password": "pass1112",
       "role_id": "10",
       "registred_at": "2025-01-02"
     }
-  ],
+  },
   "roles": [
     {
       "id": "10",
