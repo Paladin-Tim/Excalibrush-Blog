@@ -64,6 +64,7 @@ export const AuthPanel = () => {
         break;
       case "2":
         dispatch(logout(session));
+        sessionStorage.removeItem("userData");
     }
   };
 

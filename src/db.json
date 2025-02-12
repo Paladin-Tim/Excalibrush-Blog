@@ -5,49 +5,72 @@
       "login": "admin",
       "password": "pass1112",
       "role_id": "10",
-      "registred_at": "2025-01-02"
+      "registred_at": "02.01.2025, 14:46:23"
     }
   },
-  "roles": [
-    {
+  "roles": {
+    "10": {
       "id": "10",
       "name": "Administrator"
     },
-    {
+    "01": {
       "id": "01",
       "name": "Guest"
     },
-    {
+    "02": {
       "id": "02",
       "name": "User"
     },
-    {
+    "03": {
       "id": "03",
       "name": "Moderator"
     }
-  ],
-  "posts": [
-    {
+  },
+  "posts": {
+    "001": {
       "id": "001",
       "title": "Test post",
       "content": "Test post content",
       "image_url": "https://sun9-38.userapi.com/impg/te6xtPe98qBb7HSP_FfaoeqQXwr8p4AsKKoE3w/oB66VUIRBNY.jpg?size=1445x1920&quality=95&sign=0fd17e2c676b3c89985df8682746e053&type=album",
-      "published_at": "2025-01-12"
+      "published_at": "2025-01-12",
+      "comments": {
+        "-Ofkdsfndsx": {
+          "id": "-Ofkdsfndsx",
+          "content": "This sucks!!!",
+          "author_id": "Mach069",
+          "published_at": "19.01.2025, 14:12:23"
+        }
+      }
     },
-    {
+    "002": {
       "id": "002",
       "title": "Test post",
       "content": "Test post content",
       "image_url": "https://sun9-38.userapi.com/impg/te6xtPe98qBb7HSP_FfaoeqQXwr8p4AsKKoE3w/oB66VUIRBNY.jpg?size=1445x1920&quality=95&sign=0fd17e2c676b3c89985df8682746e053&type=album",
-      "published_at": "2025-01-15"
+      "published_at": "2025-01-15",
+      "comments": {
+        "-O32432sdvfd": {
+          "id": "-O32432sdvfd",
+          "content": "Great!",
+          "author_id": "Ivan123",
+          "published_at": "25.01.2025, 12:12:23"
+        }
+      }
     },
-    {
+    "003": {
       "id": "003",
       "title": "Test post",
       "content": "Test post content",
       "image_url": "https://sun9-38.userapi.com/impg/te6xtPe98qBb7HSP_FfaoeqQXwr8p4AsKKoE3w/oB66VUIRBNY.jpg?size=1445x1920&quality=95&sign=0fd17e2c676b3c89985df8682746e053&type=album",
-      "published_at": "2025-01-22"
+      "published_at": "2025-01-22",
+      "comments": {
+        "-Occqdetr": {
+          "id": "-Occqdetr",
+          "content": "Ok",
+          "author_id": "Guest",
+          "published_at": "28.01.2025, 17:34:45"
+        }
+      }
     }
-  ],
-  "comments": []
+  }
 }

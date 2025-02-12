@@ -8,7 +8,7 @@ import { ROLE } from "../../bff/constants";
 import "./users.scss";
 
 export const UsersPage = () => {
-  const [roles, setRoles] = useState([]);
+  const [roles, setRoles] = useState({});
   const [errorMessage, setErrorMessage] = useState(null);
 
   const usersList = useSelector(selectUsersList);
@@ -56,7 +56,9 @@ export const UsersPage = () => {
                   login={login}
                   registredAt={registred_at}
                   roleId={role_id}
-                  roles={roles.filter(({ id }) => id !== ROLE.GUEST)}
+                  roles={Object.values(roles).filter(
+                    ({ id }) => id !== ROLE.GUEST,
+                  )}
                 />
               ),
             )}
