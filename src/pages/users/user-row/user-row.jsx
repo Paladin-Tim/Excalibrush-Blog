@@ -11,8 +11,6 @@ export const UserRow = ({ id, login, registredAt, roleId, roles }) => {
 
   const dispatch = useDispatch();
 
-  const defaultRoleName = roles.find(({ id }) => id === roleId).id;
-
   const handleSelectChange = (value) => {
     if (value === roleId) {
       setIsDisabled(true);
@@ -41,7 +39,7 @@ export const UserRow = ({ id, login, registredAt, roleId, roles }) => {
       <div className="userInfo__regDate">{registredAt}</div>
       <Select
         className="userInfo__role"
-        defaultValue={defaultRoleName}
+        defaultValue={roleId}
         onChange={handleSelectChange}
         options={roles.map(({ id, name }) => ({
           key: id,

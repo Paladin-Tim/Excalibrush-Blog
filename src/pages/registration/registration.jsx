@@ -1,7 +1,7 @@
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { server } from "../../bff";
+import { server, sessions } from "../../bff";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { setUser } from "../../redux/actions/set-user";
@@ -49,6 +49,10 @@ export const Registration = () => {
         return;
       }
       dispatch(setUser(res));
+      sessionStorage.setItem(
+        "userData",
+        JSON.stringify({ ...sessions.list[res.session], session: res.session }),
+      );
       reset();
       navigate("/");
     });

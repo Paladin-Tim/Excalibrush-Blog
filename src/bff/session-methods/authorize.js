@@ -4,6 +4,8 @@ import { getUser } from "../api/get-user";
 export const authorize = async (authLogin, authPassword) => {
   const user = await getUser(authLogin);
 
+  // const { id, login, role_id, registred_at } = user;
+
   if (!user) {
     return {
       error: "No such user!",
@@ -19,9 +21,7 @@ export const authorize = async (authLogin, authPassword) => {
   return {
     error: null,
     res: {
-       id: user.id,
-      login: user.login,
-      roleId: user.role_id,
+      ...user,
       session: sessions.create(user),
     },
   };

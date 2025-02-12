@@ -18,7 +18,7 @@ export const updateUserRole = async (userId, userNewRoleId) => {
     error: null,
     res: {
       id: userId,
-      roleId: userNewRoleId,
+      role_id: userNewRoleId,
     },
   };
 };
