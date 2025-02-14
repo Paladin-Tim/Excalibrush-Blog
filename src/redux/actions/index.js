@@ -6,3 +6,4 @@ export * from "./delete-user";
 export * from "./save-user-role";
 export * from "./set-post";
 export * from "./add-comment";
+export * from './delete-comment'

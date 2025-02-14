@@ -8,6 +8,7 @@ import {
   removeUser,
   fetchPost,
   addComment,
+  removeComment,
 } from "./session-methods";
 
 export const server = {
@@ -20,4 +21,5 @@ export const server = {
   removeUser,
   fetchPost,
   addComment,
+  removeComment,
 };

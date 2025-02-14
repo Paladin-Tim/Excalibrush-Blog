@@ -21,17 +21,14 @@ export const PostComments = ({ comments, postId }) => {
   const userId = useSelector(selectUserId);
   const userLogin = useSelector(selectUserLogin);
   const userRole = useSelector(selectUserRole);
-  const userSession = useSelector(selectUserSession);
 
   const dispatch = useDispatch();
 
   const handleAddComment = (postId) => {
-    server
-      .addComment(userSession, postId, userId, userLogin, comment)
-      .then(({ res }) => {
-        dispatch(addComment(res));
-        setComment("");
-      });
+    server.addComment(postId, userId, userLogin, comment).then(({ res }) => {
+      dispatch(addComment(res));
+      setComment("");
+    });
   };
 
   return (
@@ -57,9 +54,11 @@ export const PostComments = ({ comments, postId }) => {
           ({ id, author_name, content, published_at }) => (
             <Comment
               key={id}
+              id={id}
               content={content}
               author_name={author_name}
               published_at={published_at}
+              post_id={postId}
             />
           ),
         )}

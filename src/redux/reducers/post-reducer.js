@@ -15,6 +15,9 @@ export const postReducer = (state = initialState, { type, payload }) => {
       return { ...state, ...payload };
     case ACTION_TYPES.ADD_COMMENT:
       return { ...state, comments: { ...state.comments, ...payload } };
+    case ACTION_TYPES.DELETE_COMMENT:
+      delete state.comments[payload.comment_id];
+      return { ...state };
     default:
       return state;
   }
