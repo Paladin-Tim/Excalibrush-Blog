@@ -4,6 +4,8 @@ export * from "./logout";
 export * from "./get-users";
 export * from "./delete-user";
 export * from "./save-user-role";
+export * from "./edit-post";
 export * from "./set-post";
+export * from "./delete-post";
 export * from "./add-comment";
-export * from './delete-comment'
+export * from "./delete-comment";

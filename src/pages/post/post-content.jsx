@@ -4,10 +4,20 @@ import {
   EditOutlined,
   DeleteOutlined,
 } from "@ant-design/icons";
+import { ImageGallery } from "../../components/PageContent/ImageGallery/ImageGallery";
+import { ROLE } from "../../bff/constants";
+import { useSelector } from "react-redux";
+import { selectUserRole } from "../../redux/selectors";
+import { DeletePostButton } from "../../components/DeletePostButton/DeletePostButton";
+import { useNavigate } from "react-router-dom";
 
 export const PostContent = ({
-  post: { id, title, content, image_url, published_at },
+  post: { id, title, content, image_urls, published_at },
 }) => {
+  const userRole = useSelector(selectUserRole);
+
+  const navigate = useNavigate();
+
   return (
     <article className="blog-post__content">
       <h2 className="blog-post__title">{title}</h2>
@@ -16,13 +26,18 @@ export const PostContent = ({
           <CalendarOutlined />
           <span>{published_at}</span>
         </section>
-        <section className="blog-post__menu">
-          <Button icon={<EditOutlined />} onClick=""></Button>
-          <Button icon={<DeleteOutlined />} onClick=""></Button>
-        </section>
+        {userRole === ROLE.ADMIN && (
+          <section className="blog-post__menu">
+            <Button
+              icon={<EditOutlined />}
+              onClick={() => navigate(`/post/${id}/edit`)}
+            ></Button>
+            <DeletePostButton postId={id} />
+          </section>
+        )}
       </section>
       <section className="blog-post__gallery">
-        <img src={image_url} style={{ maxWidth: "100vw" }}></img>
+        <ImageGallery postImgURLs={image_urls} />
       </section>
       <section className="blog-post__text">{content}</section>
     </article>
