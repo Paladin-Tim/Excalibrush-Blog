@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 
-export const useInput = (defaultVal = "") => {
-  const [value, setValue] = useState(defaultVal);
+export const useInput = (defaultValue = "") => {
+  const [value, setValue] = useState(defaultValue);
+
+  useLayoutEffect(() => {
+    setValue(defaultValue);
+  }, [defaultValue]);
 
   return {
     value,
-    onChange: (event) => setValue(event.target.value),
-    clear: () => setValue(defaultVal),
+    onChange: ({ target }) => setValue(target.value),
+    clear: () => setValue(""),
   };
 };

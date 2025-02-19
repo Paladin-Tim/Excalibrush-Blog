@@ -7,6 +7,8 @@ import {
   updateUserRole,
   removeUser,
   fetchPost,
+  editPost,
+  removePost,
   addComment,
   removeComment,
 } from "./session-methods";
@@ -20,6 +22,8 @@ export const server = {
   updateUserRole,
   removeUser,
   fetchPost,
+  editPost,
+  removePost,
   addComment,
   removeComment,
 };
