@@ -1,20 +1,39 @@
 import { db } from "../../firebase";
-import { ref, update, get } from "firebase/database";
+import { ref, update, get, push } from "firebase/database";
+
+const postsDBRef = ref(db, "posts");
 
 export const setPost = async (postId, title, content, imageUrls) => {
-  const postDBRef = ref(db, `posts/${postId}`);
+  if (!postId) {
+    const newPost = {
+        title: title,
+        content: content,
+        image_urls: imageUrls,
+        published_at: new Date().toLocaleString(),
+      };
 
-  await update(postDBRef, {
-    title: title,
-    content: content,
-    image_urls: imageUrls,
-  });
+      const newPostId = await push(postsDBRef, newPost).key;
 
-  let updatedPost = {};
+      const updates = {};
+      updates[newPostId] = { ...newPost, id: newPostId };
+      await update(postsDBRef, updates);
 
-  await get(postDBRef).then((snapshot) => {
-    updatedPost = snapshot.val();
-  });
+      return { ...newPost, id: newPostId };
+  } else {
+    const postDBRef = ref(db, `posts/${postId}`);
 
-  return updatedPost;
+    await update(postDBRef, {
+      title: title,
+      content: content,
+      image_urls: imageUrls,
+    });
+
+    let updatedPost = {};
+
+    await get(postDBRef).then((snapshot) => {
+      updatedPost = snapshot.val();
+    });
+
+    return updatedPost;
+  }
 };
