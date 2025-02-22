@@ -15,6 +15,8 @@ export const postReducer = (state = initialState, { type, payload }) => {
       return { ...state, ...payload };
     case ACTION_TYPES.SET_POST:
       return { ...state, ...payload };
+    case ACTION_TYPES.RESET_POST:
+      return initialState;
     case ACTION_TYPES.DELETE_POST:
       return initialState;
     case ACTION_TYPES.ADD_COMMENT:

@@ -1,7 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { useParams, useMatch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setPost } from "../../redux/actions";
+import { setPost, resetPost } from "../../redux/actions";
 import { selectPost } from "../../redux/selectors";
 import { server } from "../../bff";
 import { PostContent } from "./post-content";
@@ -10,21 +10,29 @@ import { PostEditForm } from "./post-edit-form";
 
 export const BlogPost = () => {
   const post = useSelector(selectPost);
+  const isCreating = useMatch("/post");
   const isEditing = useMatch("/post/:id/edit");
   const dispatch = useDispatch();
   const params = useParams();
 
+  useLayoutEffect(() => {
+    dispatch(resetPost());
+  }, [isCreating, dispatch]);
+
   useEffect(() => {
+    if (isCreating) {
+      return;
+    }
     server.fetchPost(params.id).then(({ res }) => {
       dispatch(setPost(res));
     });
-  }, [dispatch, params.id]);
+  }, [isCreating, dispatch, params.id]);
 
   return (
     <>
-      {isEditing ? (
+      {isCreating || isEditing ? (
         <article className="content__block post-edit-form">
-          <PostEditForm post={post} />
+          <PostEditForm post={post} isEditing={isEditing} />
         </article>
       ) : (
         <article className="content__block blog-post">
