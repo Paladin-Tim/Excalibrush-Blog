@@ -1,15 +1,11 @@
-import { Button } from "antd";
-import {
-  CalendarOutlined,
-  EditOutlined,
-  DeleteOutlined,
-} from "@ant-design/icons";
-import { ImageGallery } from "../../components/PageContent/ImageGallery/ImageGallery";
-import { ROLE } from "../../bff/constants";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUserRole } from "../../redux/selectors";
+import { ROLE } from "../../bff/constants";
+import { ImageGallery } from "../../components/PageContent/ImageGallery/ImageGallery";
 import { DeletePostButton } from "../../components/DeletePostButton/DeletePostButton";
-import { useNavigate } from "react-router-dom";
+import { Button } from "antd";
+import { CalendarOutlined, EditOutlined } from "@ant-design/icons";
 
 export const PostContent = ({
   post: { id, title, content, image_urls, published_at },

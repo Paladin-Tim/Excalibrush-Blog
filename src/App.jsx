@@ -3,7 +3,13 @@ import { useDispatch } from "react-redux";
 import { setUser } from "./redux/actions";
 import { Routes, Route } from "react-router-dom";
 import { Header, Footer, PageContent } from "./components";
-import { Authorization, Registration, UsersPage, BlogPost } from "./pages/";
+import {
+  Authorization,
+  Registration,
+  UsersPage,
+  BlogPost,
+  Main,
+} from "./pages/";
 import "./App.css";
 
 export const App = () => {
@@ -24,7 +30,7 @@ export const App = () => {
       <Header />
       <PageContent>
         <Routes>
-          <Route path="/" element={<div>Main page</div>} />
+          <Route path="/" element={<Main />} />
           <Route path="/login" element={<Authorization />} />
           <Route path="/register" element={<Registration />} />
           <Route path="/users" element={<UsersPage />} />

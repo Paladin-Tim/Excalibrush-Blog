@@ -4,7 +4,6 @@ import { sessions } from "../sessions";
 
 export const fetchUsers = async (userSession) => {
   const accessRoles = [ROLE.ADMIN];
-  console.log(userSession);
   if (!sessions.access(userSession, accessRoles)) {
     return {
       error: "Access denied!",
