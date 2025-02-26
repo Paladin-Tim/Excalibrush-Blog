@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { useParams, useMatch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setPost, resetPost } from "../../redux/actions";
@@ -7,6 +7,7 @@ import { server } from "../../bff";
 import { PostContent } from "./post-content";
 import { PostComments } from "./post-comments";
 import { PostEditForm } from "./post-edit-form";
+import { Loader } from "../../components";
 
 export const BlogPost = () => {
   const post = useSelector(selectPost);
@@ -14,6 +15,8 @@ export const BlogPost = () => {
   const isEditing = useMatch("/post/:id/edit");
   const dispatch = useDispatch();
   const params = useParams();
+
+  const [isLoading, setIsLoading] = useState(true);
 
   useLayoutEffect(() => {
     dispatch(resetPost());
@@ -25,15 +28,22 @@ export const BlogPost = () => {
     }
     server.fetchPost(params.id).then(({ res }) => {
       dispatch(setPost(res));
+      setIsLoading(false);
     });
   }, [isCreating, dispatch, params.id]);
 
   return (
     <>
       {isCreating || isEditing ? (
-        <article className="content__block post-edit-form">
-          <PostEditForm post={post} isEditing={isEditing} />
-        </article>
+        isLoading ? (
+          <Loader />
+        ) : (
+          <article className="content__block post-edit-form">
+            <PostEditForm post={post} isEditing={isEditing} />
+          </article>
+        )
+      ) : isLoading ? (
+        <Loader />
       ) : (
         <article className="content__block blog-post">
           <PostContent post={post} />

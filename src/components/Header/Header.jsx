@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { SearchPanel } from "./SearchPanel";
 import { NavMenu } from "./NavMenu";
 import { AuthPanel } from "./AuthPanel";
 import "./Header.scss";
@@ -14,7 +13,6 @@ export const Header = () => {
       </section>
       <nav className="header__menu">
         <NavMenu />
-        <SearchPanel />
       </nav>
       <AuthPanel />
     </article>
