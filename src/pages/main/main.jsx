@@ -119,13 +119,23 @@ export const Main = () => {
             )}
           </Row>
 
-          {totalPages > 2 && (
+          {!isSearching && totalPages > 2 && (
             <Pagination
               align="center"
               current={currentPage}
               onChange={handleSetPage}
               pageSize={PAGINATION_LIMIT}
               total={totalPages}
+            />
+          )}
+
+          {isSearching && searchResult.length > 2 && (
+            <Pagination
+              align="center"
+              current={currentPage}
+              onChange={handleSetPage}
+              pageSize={PAGINATION_LIMIT}
+              total={searchResult.length}
             />
           )}
         </>
