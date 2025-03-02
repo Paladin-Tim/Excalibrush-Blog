@@ -6,10 +6,11 @@ import { selectUsersList } from "../../redux/selectors";
 import { UserRow } from "./user-row/user-row";
 import { ROLE } from "../../bff/constants";
 import "./users.scss";
+import { GlobalError } from "../../components";
 
 export const UsersPage = () => {
   const [roles, setRoles] = useState({});
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [error, setError] = useState(null);
 
   const usersList = useSelector(selectUsersList);
 
@@ -23,7 +24,7 @@ export const UsersPage = () => {
       requestServer("fetchRoles"),
     ]).then(([usersRes, rolesRes]) => {
       if (usersRes.error || rolesRes.error) {
-        setErrorMessage(usersRes.error || rolesRes.error);
+        setError(usersRes.error || rolesRes.error);
         return;
       }
 
@@ -34,11 +35,8 @@ export const UsersPage = () => {
 
   return (
     <article className="usersTab__wrapper">
-      {errorMessage ? (
-        <>
-          <h3>Server error</h3>
-          <section>{errorMessage}</section>
-        </>
+      {error ? (
+        <GlobalError error={error} />
       ) : (
         <>
           <h3>Users</h3>

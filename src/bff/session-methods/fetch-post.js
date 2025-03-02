@@ -1,12 +1,16 @@
 import { getPost } from "../api";
+import { globalErrors } from "../constants";
 
 export const fetchPost = async (postId) => {
   const post = await getPost(postId);
 
-//  const { id, title, content, image_url, published_at, comments } = post;
-
-  return {
-    error: null,
-    res: post
-  };
+  return !post
+    ? {
+        error: globalErrors.PAGE_NOT_FOUND,
+        res: null,
+      }
+    : {
+        error: null,
+        res: post,
+      };
 };
