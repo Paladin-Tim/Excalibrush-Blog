@@ -2,6 +2,21 @@ import { useEffect, useState } from "react";
 
 export const WeatherWidget = () => {
   const [weatherData, setwWeatherData] = useState({});
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const month = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
 
   useEffect(() => {
     fetch(
@@ -14,12 +29,15 @@ export const WeatherWidget = () => {
           temperature: main.temp.toFixed(0),
           weather: weather[0].description,
         });
+        setCurrentDate(new Date());
       });
   }, []);
 
   return (
     <section className="footer__weather-wiget">
-      <div>{weatherData.city}</div>
+      <div>
+        {`${weatherData.city}, ${currentDate.getDate()} ${month[currentDate.getMonth()]}`}
+      </div>
       <div>
         {weatherData.temperature + "°C"}, {weatherData.weather}
       </div>

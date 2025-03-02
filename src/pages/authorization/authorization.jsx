@@ -6,7 +6,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { setUser } from "../../redux/actions/set-user";
 import { useDispatch } from "react-redux";
-import { ServerError } from "../../components";
+import { ValidationError } from "../../components";
 import "./authorization.scss";
 
 const authFormScheme = yup.object().shape({
@@ -84,7 +84,7 @@ export const Authorization = () => {
         >
           Log in
         </button>
-        {serverError && <ServerError errorText={serverError} />}
+        {serverError && <ValidationError errorText={serverError} />}
         <div className="tip">
           Does not have an account? <Link to="/register">Registartion</Link>
         </div>
