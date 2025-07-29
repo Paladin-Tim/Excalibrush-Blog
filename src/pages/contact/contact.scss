@@ -1,0 +1,43 @@
+.contact {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  &__description {
+    font-size: 1.25rem;
+  }
+
+  &__email {
+    font-size: 2rem;
+    font-weight: 600;
+
+    a {
+      color: #fff !important;
+      text-decoration: none !important;
+    }
+  }
+
+  &__pic {
+    background-image: url("/src/assets/contact_pic.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    aspect-ratio: 289 / 384;
+    width: 50vmax;
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+  }
+}

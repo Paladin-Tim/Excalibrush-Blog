@@ -17,11 +17,11 @@ export const Comment = ({
   return (
     <article className="blog-post__comment-wrapper">
       <section className="blog-post__comment">
+        <div className="date">{published_at}</div>
         <div className="author">
           <UserOutlined />
           <span>{author_name}</span>
         </div>
-        <div className="date">{published_at}</div>
         <div className="text">{content}</div>
       </section>
       {(userLogin === author_name || userRole === ROLE.ADMIN) && (

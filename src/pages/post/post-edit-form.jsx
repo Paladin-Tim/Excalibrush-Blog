@@ -9,7 +9,9 @@ import {
   SaveOutlined,
   PlusOutlined,
   MinusCircleOutlined,
+  SendOutlined,
 } from "@ant-design/icons";
+import "./post-edit-form.scss";
 
 const { TextArea } = Input;
 
@@ -91,38 +93,17 @@ export const PostEditForm = ({
           flex: 1,
         }}
         colon={false}
-        style={{
-          maxWidth: 600,
-        }}
       >
-        <section className="post-edit-form__control-panel">
-          <Form.Item label=" ">
-            <Button
-              type="primary"
-              htmlType="submit"
-              icon={<SaveOutlined />}
-            ></Button>
-          </Form.Item>
-
-          {isEditing && (
-            <Form.Item label=" ">
-              <DeletePostButton postId={id} />
-            </Form.Item>
-          )}
-        </section>
-
         <section className="post-edit-form__title-edit">
           <Form.Item
-            label="Post title"
             name="title"
-            placeholder="Enter post title..."
             rules={[
               {
                 required: true,
               },
             ]}
           >
-            <Input />
+            <Input placeholder="Enter post title..." />
           </Form.Item>
         </section>
 
@@ -144,7 +125,6 @@ export const PostEditForm = ({
                 {fields.map((field, index) => (
                   <Form.Item
                     {...formItemLayout}
-                    label="Image URL"
                     required={false}
                     key={field.key}
                   >
@@ -161,18 +141,14 @@ export const PostEditForm = ({
                       ]}
                       noStyle
                     >
-                      <Input
-                        placeholder={`Image #${index + 1} URL`}
-                        style={{
-                          width: "90%",
-                        }}
-                      />
+                      <Input placeholder={`Image #${index + 1} URL`} />
                     </Form.Item>
                     {fields.length > 1 ? (
-                      <MinusCircleOutlined
+                      <Button
                         className="dynamic-delete-button"
                         onClick={() => remove(field.name)}
-                      />
+                        icon={<MinusCircleOutlined />}
+                      ></Button>
                     ) : null}
                   </Form.Item>
                 ))}
@@ -196,7 +172,6 @@ export const PostEditForm = ({
 
         <section className="post-edit-form__content-edit">
           <Form.Item
-            label="Post content"
             name="content"
             rules={[
               {
@@ -211,6 +186,24 @@ export const PostEditForm = ({
               }}
             />
           </Form.Item>
+        </section>
+
+        <section className="post-edit-form__control-panel">
+          <Form.Item>
+            <Button
+              type="primary"
+              htmlType="submit"
+              icon={isEditing ? <SaveOutlined /> : <SendOutlined />}
+            >
+              {isEditing ? "Save" : "Publish"}
+            </Button>
+          </Form.Item>
+
+          {isEditing && (
+            <Form.Item>
+              <DeletePostButton postId={id} />
+            </Form.Item>
+          )}
         </section>
       </Form>
     </article>

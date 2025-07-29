@@ -7,8 +7,9 @@ export const NavMenu = () => {
       <Link to="/">
         <Button className="menu__button">Home</Button>
       </Link>
-      <Button className="menu__button">About</Button>
-      <Button className="menu__button">Contact</Button>
+      <Link to="/contact">
+        <Button className="menu__button">Contact</Button>
+      </Link>
     </section>
   );
 };

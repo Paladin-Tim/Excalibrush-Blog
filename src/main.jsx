@@ -10,6 +10,7 @@ import {
   UsersPage,
   BlogPost,
   Main,
+  Contact,
 } from "./pages";
 import { globalErrors } from "./bff/constants";
 import "./index.scss";
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Main />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
       },
       {
         path: "/login",

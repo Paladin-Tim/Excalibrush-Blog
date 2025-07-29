@@ -7,7 +7,8 @@ import { getPosts } from "../../redux/actions";
 import { selectPostsList } from "../../redux/selectors";
 import { Loader } from "../../components";
 import { Carousel, Col, Row, Pagination, Input } from "antd";
-import { CalendarOutlined, MessageOutlined } from "@ant-design/icons";
+import { MessageOutlined } from "@ant-design/icons";
+import "./main-page.scss";
 
 const { Search } = Input;
 
@@ -71,6 +72,24 @@ export const Main = () => {
 
   return (
     <article className="content__block main-page">
+      <section className="main-page__welcome">
+        <section className="main-page__welcome-text-wrapper">
+          <h1 className="main-page__welcome-title">Welcome to EXCALIBRUSH!</h1>
+          <span className="main-page__welcome-description">
+            Hello! My name is Tim and I have been painting miniatures for almost
+            20 years. My first and main love was and remains the WarHammer
+            universe (in all its manifestations), but I also follow other
+            fandoms. <br></br>
+            Here I share my experience and exhibit my works. If you have
+            miniatures or terrain that need to be painted, I will be happy to
+            help with this. Just write me on email and we will agree on
+            everything. <br></br>
+            Come in, make yourself comfortable and may the grace of the
+            God-Emperor be with you!
+          </span>
+        </section>
+        <div className="main-page__welcome-photo"></div>
+      </section>
       <section className="main-page__post-grid-header">
         <h2 className="main-page__post-grid-title">Posts</h2>
         <Search
@@ -79,7 +98,7 @@ export const Main = () => {
           size="large"
           onSearch={(value) => handleSearch(value, currentPage)}
           enterButton
-          className="search"
+          className="main-page__search"
         />
       </section>
 
@@ -98,7 +117,11 @@ export const Main = () => {
                 <Col key={id} className="post-wrapper" sm={12} md={10} lg={8}>
                   <Carousel arrows infinite autoplay className="post-gallery">
                     {Object.values(image_urls).map((url) => (
-                      <img key={Math.random()} src={url}></img>
+                      <img
+                        key={Math.random()}
+                        src={url}
+                        className="post-gallery__item"
+                      ></img>
                     ))}
                   </Carousel>
                   <Link to={`/post/${id}`}>
@@ -106,12 +129,14 @@ export const Main = () => {
                   </Link>
                   <section className="post-info">
                     <span className="post-date">
-                      <CalendarOutlined />
-                      {published_at}
+                      {/* <CalendarOutlined /> */}
+                      {published_at.slice(0, 10)}
                     </span>
                     <section className="post-comments">
                       <MessageOutlined />
-                      {Object.values(comments).length || 0}
+                      {comments != undefined
+                        ? Object.values(comments).length
+                        : 0}
                     </section>
                   </section>
                 </Col>

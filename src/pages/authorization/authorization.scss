@@ -10,7 +10,11 @@
     margin: 0 auto;
     padding: 2rem;
     text-align: center;
-    width: 40%;
+    width: 50%;
+
+    @media (max-width: 768px) {
+      width: 70%;
+    }
   }
 
   & .formTitle {
@@ -41,7 +45,7 @@
   }
 
   & .submitBtn {
-    background: linear-gradient(90deg, #7b45b7, #37b6d9);
+    background: #391b19;
     color: #fff;
     border: none;
     padding: 0.7rem 2rem;

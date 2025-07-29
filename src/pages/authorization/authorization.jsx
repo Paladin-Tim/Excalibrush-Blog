@@ -1,41 +1,48 @@
 import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
-import { server, sessions } from "../../bff";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { setUser } from "../../redux/actions/set-user";
 import { useDispatch } from "react-redux";
+import { setUser } from "../../redux/actions/set-user";
+import { server, sessions } from "../../bff";
 import { ValidationError } from "../../components";
+import { Form, Input, Button } from "antd";
 import "./authorization.scss";
 
-const authFormScheme = yup.object().shape({
-  login: yup.string().required("Shouldn't be empty"),
-  password: yup
-    .string()
-    .required("Shouldn't be empty")
-    .matches(/^[\w]*$/, "Password must contain only letters and numbers.")
-    .min(3, "Password must not be shorter than 3 characters")
-    .max(20, "Password should not be longer than 20 characters"),
-});
-
 export const Authorization = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { isValid, errors },
-    reset,
-  } = useForm({
-    resolver: yupResolver(authFormScheme),
-    mode: "onTouched",
-  });
+  const [form] = Form.useForm();
 
+  const [submittable, setSubmittable] = useState(false);
   const [serverError, setServerError] = useState("");
+
+  const formRules = {
+    login: [{ required: true, message: "Shouldn't be empty" }],
+    password: [
+      { required: true, message: "Shouldn't be empty" },
+      {
+        pattern: /^[\w]*$/,
+        message: "Password must contain only letters and numbers",
+      },
+      { min: 3, message: "Password should't be shorter than 3 characters" },
+      { max: 20, message: "Password should't be longer than 20 characters" },
+    ],
+  };
+
+  const values = Form.useWatch([], form);
+  useEffect(() => {
+    form
+      .validateFields({
+        validateOnly: true,
+      })
+      .then(() => setSubmittable(true))
+      .catch(() => setSubmittable(false));
+  }, [form, values]);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const onFormSubmit = ({ login, password }) => {
+  const onFormSubmit = () => {
+    const { login, password } = form.getFieldsValue();
+
     server.authorize(login, password).then(({ res, error }) => {
       if (error) {
         setServerError(error);
@@ -47,48 +54,41 @@ export const Authorization = () => {
         "userData",
         JSON.stringify({ ...sessions.list[res.session], session: res.session }),
       );
-      reset();
+      form.resetFields();
       navigate("/");
     });
   };
 
   return (
     <article className="userForm__wrapper">
-      <form className="userForm" onSubmit={handleSubmit(onFormSubmit)}>
+      <Form
+        form={form}
+        name="userForm"
+        className="userForm"
+        validateTrigger="onBlur"
+      >
         <h3 className="formTitle">Authorization</h3>
-        <div className="inputWrapper">
-          <input
-            {...register("login", { onChange: () => setServerError("") })}
-            type="text"
-            name="login"
-            placeholder="Login"
-            className={`formInput ${errors.login && "hasError"}`}
-          ></input>
-          <span className="errorText">{errors.login?.message}</span>
-        </div>
-        <div className="inputWrapper">
-          <input
-            {...register("password", { onChange: () => setServerError("") })}
-            type="password"
-            name="password"
-            placeholder="Password"
-            className={`formInput ${errors.password && "hasError"}`}
-          ></input>
-          <span className="errorText">{errors.password?.message}</span>
-        </div>
-        <button
+        <Form.Item name="login" rules={formRules.login}>
+          <Input placeholder="Login"></Input>
+        </Form.Item>
+        <Form.Item name="password" rules={formRules.password}>
+          <Input.Password placeholder="Password"></Input.Password>
+        </Form.Item>
+        <Button
+          onClick={onFormSubmit}
           type="submit"
           className="submitBtn"
           data-focus="0"
-          disabled={!isValid}
+          form={form}
+          disabled={!submittable}
         >
           Log in
-        </button>
+        </Button>
         {serverError && <ValidationError errorText={serverError} />}
         <div className="tip">
           Does not have an account? <Link to="/register">Registartion</Link>
         </div>
-      </form>
+      </Form>
     </article>
   );
 };
