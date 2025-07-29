@@ -9,6 +9,7 @@ import { PostContent } from "./post-content";
 import { PostComments } from "./post-comments";
 import { PostEditForm } from "./post-edit-form";
 import { GlobalError, Loader } from "../../components";
+import "./blog-post.scss";
 
 export const BlogPost = () => {
   const post = useSelector(selectPost);

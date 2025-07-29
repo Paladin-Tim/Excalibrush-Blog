@@ -3,3 +3,4 @@ export * from "./registration/registration";
 export * from "./users/users";
 export * from "./post/blog-post";
 export * from "./main/main";
+export * from "./contact/contact";

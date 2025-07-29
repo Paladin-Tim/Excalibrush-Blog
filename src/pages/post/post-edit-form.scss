@@ -1,0 +1,51 @@
+.post-edit-form {
+  background: #fff;
+  border-radius: 0.75rem;
+  width: 60%;
+  margin: 2rem auto;
+  color: #000;
+  padding: 0.5rem 1rem;
+
+  @media (max-width: 768px) {
+    width: 90%;
+  }
+
+  &__content {
+    .ant-form {
+      display: flex;
+      flex-direction: column;
+    }
+    .ant-form-item-control-input-content {
+      display: flex;
+      gap: 1rem;
+    }
+  }
+
+  &__gallery-edit {
+    display: flex;
+    flex-direction: column;
+
+    .ant-btn-dashed {
+      background: #391b19 !important;
+      border-color: #fff !important;
+      color: #fff !important;
+
+      &:hover {
+        background: #532b29 !important;
+      }
+    }
+  }
+
+  &__control-panel {
+    display: flex;
+    gap: 1rem;
+
+    .ant-btn-primary {
+      background: #391b19 !important;
+
+      &:hover {
+        background: #532b29 !important;
+      }
+    }
+  }
+}

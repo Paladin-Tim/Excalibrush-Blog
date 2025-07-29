@@ -2,11 +2,11 @@
   position: sticky;
   top: 0;
   z-index: 1;
-
+  background: #281212;
+  min-height: 10vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #281212;
   padding: 0.7rem 2rem;
 
   &__logo-wrapper {
@@ -16,6 +16,12 @@
       background-repeat: no-repeat;
       height: 50px;
       aspect-ratio: 557 / 100;
+
+      @media (max-width: 768px) {
+        background-image: url(/src/assets/favicon.png);
+        aspect-ratio: 1/1;
+        height: 30px;
+      }
     }
   }
 
@@ -27,12 +33,34 @@
     & .buttons {
       display: flex;
       justify-content: space-between;
+      gap: 1.5rem;
+
+      @media (max-width: 768px) {
+        gap: 0.75rem;
+      }
+
+      button {
+        background-color: transparent;
+        border: none;
+        color: #fff;
+
+        &:hover {
+          background-color: #532b29 !important;
+          border: none;
+          color: #fff !important;
+        }
+      }
     }
   }
 
   &__auth-panel {
     .admin__menu {
       border-radius: 0.375rem;
+    }
+    button {
+      border: none;
+      background-color: #532b29;
+      color: #fff;
     }
   }
 }

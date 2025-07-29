@@ -33,36 +33,41 @@ export const PostComments = ({ comments, postId }) => {
 
   return (
     <article className="blog-post__comments">
-      {userRole !== ROLE.GUEST && (
-        <section className="blog-post__new-comment">
-          <TextArea
-            value={comment}
-            placeholder="Comment..."
-            autoSize={{
-              minRows: 4,
-            }}
-            onChange={({ target }) => setComment(target.value)}
-          ></TextArea>
-          <Button
-            icon={<SendOutlined />}
-            onClick={() => handleAddComment(postId)}
-          ></Button>
-        </section>
-      )}
-      <article className="blog-post__comments-list">
-        {Object.values(comments).map(
-          ({ id, author_name, content, published_at }) => (
-            <Comment
-              key={id}
-              id={id}
-              content={content}
-              author_name={author_name}
-              published_at={published_at}
-              post_id={postId}
-            />
-          ),
+      <h2>Comments</h2>
+      <section className="blog-post__comments-section">
+        <article className="blog-post__comments-list">
+          {Object.values(comments).map(
+            ({ id, author_name, content, published_at }) => (
+              <Comment
+                key={id}
+                id={id}
+                content={content}
+                author_name={author_name}
+                published_at={published_at}
+                post_id={postId}
+              />
+            ),
+          )}
+        </article>
+        {userRole !== ROLE.GUEST && (
+          <article className="blog-post__new-comment">
+            <TextArea
+              value={comment}
+              placeholder="Comment..."
+              autoSize={{
+                minRows: 4,
+              }}
+              onChange={({ target }) => setComment(target.value)}
+            ></TextArea>
+            <Button
+              icon={<SendOutlined />}
+              onClick={() => handleAddComment(postId)}
+            >
+              Send
+            </Button>
+          </article>
         )}
-      </article>
+      </section>
     </article>
   );
 };

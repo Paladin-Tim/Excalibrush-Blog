@@ -39,7 +39,7 @@ export const UsersPage = () => {
         <GlobalError error={error} />
       ) : (
         <>
-          <h3>Users</h3>
+          <h1>Users</h1>
           <article className="usersTab">
             <section className="usersTab__header">
               <div className="usersTab__colHeader">User name (login)</div>

@@ -7,4 +7,10 @@
   justify-content: space-between;
   align-items: center;
   background: #281212;
+  min-height: 10vh;
+
+  a {
+    color: #fff !important;
+    text-decoration: none !important;
+  }
 }

@@ -10,7 +10,7 @@ export const ImageGallery = ({ postImgURLs }) => {
         }}
       >
         {Object.values(postImgURLs).map((url, i) => (
-          <Image key={i} src={url} style={{ maxWidth: "100vw", width: 200 }} />
+          <Image key={i} src={url} className="blog-post__gallery-item" />
         ))}
       </Image.PreviewGroup>
     </>

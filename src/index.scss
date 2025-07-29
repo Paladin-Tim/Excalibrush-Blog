@@ -17,6 +17,21 @@ body {
   background: #391b19;
 }
 
+.content {
+  width: 90vw;
+  margin: 2rem auto;
+  min-height: 60vh;
+
+  nav.ant-breadcrumb {
+    .ant-breadcrumb-separator {
+      color: #fff !important;
+    }
+    a {
+      color: #fff !important;
+    }
+  }
+}
+
 /* @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

@@ -16,12 +16,12 @@ export const PostContent = ({
 
   return (
     <article className="blog-post__content">
-      <h2 className="blog-post__title">{title}</h2>
+      <section className="blog-post__date">
+        {/* <CalendarOutlined /> */}
+        <span>{published_at.slice(0, 10)}</span>
+      </section>
       <section className="blog-post__control-panel">
-        <section className="blog-post__date">
-          <CalendarOutlined />
-          <span>{published_at}</span>
-        </section>
+        <h2 className="blog-post__title">{title}</h2>
         {userRole === ROLE.ADMIN && (
           <section className="blog-post__menu">
             <Button
